@@ -80,32 +80,27 @@ public enum Setting {
 	private Object def;
 	private Boolean WriteDefault;
 	
-	private Setting(String Name, Object Def)
-	{
+	private Setting(String Name, Object Def) {
 		name = Name;
 		def = Def;
 		WriteDefault = true;
 	}
 	
-	private Setting(String Name, Object Def, Boolean WriteDefault)
-	{
+	private Setting(String Name, Object Def, Boolean WriteDefault) {
 		name = Name;
 		def = Def;
 		this.WriteDefault = WriteDefault;
 	}
 	
-	public String getString()
-	{
+	public String getString() {
 		return name;
 	}
 	
-	public Object getDefault()
-	{
+	public Object getDefault() {
 		return def;
 	}
 	
-	public Boolean writeDefault()
-	{
+	public Boolean writeDefault() {
 		return WriteDefault;
 	}
 }

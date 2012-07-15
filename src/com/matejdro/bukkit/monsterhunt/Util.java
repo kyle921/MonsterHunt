@@ -15,20 +15,15 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class Util {
     public static Permission permission = null;
 
-	public static void Message(String message, CommandSender sender)
-	{
-		if (sender instanceof Player)
-		{
+	public static void Message(String message, CommandSender sender) {
+		if (sender instanceof Player) {
 			Message(message, (Player) sender);
-		}
-		else
-		{
+		} else {
 			sender.sendMessage(message);
 		}
 	}
 	
-	public static void Message(String message, Player player)
-	{
+	public static void Message(String message, Player player) {
 		message = message.replaceAll("\\&([0-9abcdef])", "§$1");
 		
 		String color = "f";
@@ -39,60 +34,53 @@ public class Util {
         String[] words = message.split(" ");
         int lineNumber = 0;
         for (int i = 0; i < words.length; i++) {
-                if (chat.get(lineNumber).length() + words[i].length() < maxLength && !words[i].equals(newLine)) {
-                        chat.set(lineNumber, chat.get(lineNumber) + (chat.get(lineNumber).length() > 0 ? " " : "§" + color ) + words[i]);
-
-                        if (words[i].contains("§")) color = Character.toString(words[i].charAt(words[i].indexOf("§") + 1));
+        	if (chat.get(lineNumber).length() + words[i].length() < maxLength && !words[i].equals(newLine)) {
+              	chat.set(lineNumber, chat.get(lineNumber) + (chat.get(lineNumber).length() > 0 ? " " : "§" + color ) + words[i]);
+              	if (words[i].contains("§")) {
+              		color = Character.toString(words[i].charAt(words[i].indexOf("§") + 1));
+              	} else {
+                	lineNumber++;
+                	if (!words[i].equals(newLine)) {
+                		chat.add(lineNumber,  "§" + color + words[i]);
+                    } else {
+                    	chat.add(lineNumber, "");
+                    }
                 }
-                else {
-                        lineNumber++;
-                        if (!words[i].equals(newLine)) {
-                                chat.add(lineNumber,  "§" + color + words[i]);
-                        }
-                        else
-                                chat.add(lineNumber, "");
-                }
+        	}
         }
         for (int i = 0; i < chat.size(); i++) {
-                player.sendMessage(chat.get(i));
+        	player.sendMessage(chat.get(i));
         }
 	}
 
-	public static void Broadcast(String message)
-	{
-		for (Player i : MonsterHunt.instance.getServer().getOnlinePlayers())
-		{
+	public static void Broadcast(String message) {
+		for (Player i : MonsterHunt.instance.getServer().getOnlinePlayers()) {
 			Message(message,i);
 		}
-			
 	}
 	
-	public static void Debug(String message)
-	{
-		if (Settings.globals.getBoolean(Setting.Debug.getString(), false))
-			MonsterHunt.log.info("[MonsterHunt][Debug]" + message);
+	public static void Debug(String message) {
+		if (Settings.globals.getBoolean(Setting.Debug.getString(), false)) {
+			Log.info("[Debug]" + message);
+		}
 	}
 	
-    public void StartFailed(MonsterHuntWorld world)
-    {
-    	if (world.settings.getInt(Setting.SkipToIfFailsToStart) >= 0)
-    	{
+    public void StartFailed(MonsterHuntWorld world) {
+    	if (world.settings.getInt(Setting.SkipToIfFailsToStart) >= 0) {
     		world.getWorld().setTime(world.settings.getInt(Setting.SkipToIfFailsToStart));
     	}
     }
         
-    public static Boolean permission(Player player, String line, PermissionDefault def)
-    {
+    public static Boolean permission(Player player, String line, PermissionDefault def) {
     	Plugin plugin = MonsterHunt.instance.getServer().getPluginManager().getPlugin("Vault");
-		if (plugin != null && setupPermissions())
+		if (plugin != null && setupPermissions()) {
 	    	return permission.has(player, line);
-    	else 
+		} else { 
     	    return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
-    	    
+		}    	    
     }
     
-    private static Boolean setupPermissions()
-    {
+    private static Boolean setupPermissions() {
     	if (permission != null) return true;
     	
         RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
@@ -101,5 +89,4 @@ public class Util {
         }
         return (permission != null);
     }
-
 }

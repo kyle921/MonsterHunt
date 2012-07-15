@@ -9,27 +9,22 @@ import com.matejdro.bukkit.monsterhunt.Settings;
 import com.matejdro.bukkit.monsterhunt.Util;
 
 public class HuntStopCommand extends BaseCommand {
-	
-	public HuntStopCommand()
-	{
+
+	public HuntStopCommand() {
 		needPlayer = false;
 		permission = "monsterhunt.admincmd.huntstop";
 		adminCommand = true;
 	}
 
-
 	public Boolean run(CommandSender sender, String[] args) {
-		if (args.length < 1 && Settings.globals.getBoolean(Setting.HuntZoneMode.getString(), false))
-		{
-			args = new String[]{"something"};
-		}
-		else if (args.length < 1)
-		{
-			Util.Message("Usage: /huntstop [World Name]",sender);
+		if (args.length < 1
+				&& Settings.globals.getBoolean(
+						Setting.HuntZoneMode.getString(), false)) {
+			args = new String[] { "something" };
+		} else if (args.length < 1) {
+			Util.Message("Usage: /huntstop [World Name]", sender);
 			return true;
-		}
-		else if (HuntWorldManager.getWorld(args[0]) == null)
-		{
+		} else if (HuntWorldManager.getWorld(args[0]) == null) {
 			Util.Message("There is no such world!", sender);
 			return true;
 		}
