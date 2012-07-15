@@ -18,7 +18,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class InputOutput {
 	private static Connection connection;
 	private static MonsterHunt plugin = MonsterHunt.instance;
-	
+
 	public static synchronized Connection getConnection() {
 		try {
 			if (connection == null || connection.isClosed()) {
@@ -74,7 +74,7 @@ public class InputOutput {
 			Log.severe("Error while retreiving high scores! - " + e.getMessage() );
 			e.printStackTrace();
 		}
-		return score;            
+		return score;
 	}
 
 	public static Integer getHighScoreRank(String player) {
@@ -97,7 +97,7 @@ public class InputOutput {
 			}
 			set.close();
 			ps.close();
-			conn.close();            
+			conn.close();
 		} catch (SQLException e) {
 			Log.severe("Error while retreiving high scores! - " + e.getMessage() );
 			e.printStackTrace();
@@ -117,20 +117,19 @@ public class InputOutput {
 
 		try {
 			ps = conn.prepareStatement("SELECT * FROM monsterhunt_highscores ORDER BY highscore DESC LIMIT ?");
-			ps.setInt(1, number);				
-			set = ps.executeQuery();           
-
-			while (set.next()) {            	
+			ps.setInt(1, number);
+			set = ps.executeQuery();
+			
+			while (set.next()) {
 				String name = set.getString("name");
 				Integer score = set.getInt("highscore");
 				map.put(name, score);
-			}	            
+			}
 			set.close();
 			ps.close();
-			conn.close();            
+			conn.close();
 		} catch (SQLException e) {
 			Log.severe("Error while retreiving high scores! - " + e.getMessage() );
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return map;
@@ -170,7 +169,7 @@ public class InputOutput {
 			YamlConfiguration config = new YamlConfiguration();
 			Settings settings = new Settings(config, new File("plugins" + File.separator + "MonsterHunt" + File.separator,n + ".yml"));
 			mw.settings = settings;
-			HuntWorldManager.worlds.put(n, mw);
+			HuntWorldManager.worlds.put(n, mw);			
 		}
 
 		String[] temp = Settings.globals.getString("HuntZone.FirstCorner", "0,0,0").split(",");
@@ -187,8 +186,7 @@ public class InputOutput {
 		Settings settings = new Settings(config, new File("plugins" + File.separator + "MonsterHunt" + File.separator + "zone.yml"));
 		mw.settings = settings;
 
-		HuntWorldManager.HuntZoneWorld = mw;
-
+		HuntWorldManager.HuntZoneWorld = mw;		
 	}
 
 	public static void LoadDefaults() {
@@ -202,10 +200,7 @@ public class InputOutput {
 			e1.printStackTrace();
 		}
 
-		for (String i : new String[]{"Zombie", "Skeleton", "Creeper", "Spider", "Ghast", 
-				"Slime", "ZombiePigman", "Giant", "TamedWolf", "WildWolf", 
-				"ElectrifiedCreeper", "Player", "Enderman", "Silverfish", 
-				"CaveSpider", "EnderDragon", "MagmaCube", "Blaze"}) {
+		for (String i : new String[]{"Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "ZombiePigman", "Giant", "TamedWolf", "WildWolf", "ElectrifiedCreeper", "Player", "Enderman", "Silverfish", "CaveSpider", "EnderDragon", "MagmaCube", "Blaze"}) {
 			if (Settings.globals.get("Value." + i) != null) continue;
 
 			Settings.globals.set("Value." + i + ".General", 10);
@@ -215,11 +210,9 @@ public class InputOutput {
 			Settings.globals.set("Value." + i + ".283", 20);
 		}
 
-		for (String i : new String[]{"MushroomCow", "Chicken", "Cow", "Pig", "Sheep", 
-				"SnowGolem", "Squid", "Villager"}) {
-			if (Settings.globals.get("Value." + i) != null) {
-				continue;
-			}			
+		for (String i : new String[]{"MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager"}) {
+			if (Settings.globals.get("Value." + i) != null) continue;
+
 			Settings.globals.set("Value." + i + ".General", 0);
 		}
 
@@ -230,7 +223,7 @@ public class InputOutput {
 			Settings.globals.set("Rewards.RewardParametersPlace1", "3 3");
 			Settings.globals.set("Rewards.RewardParametersPlace2", "3 2");
 			Settings.globals.set("Rewards.RewardParametersPlace3", "3 1");
-		}	
+		}		
 
 		for (Setting s : Setting.values()) {
 			if (s.writeDefault() && Settings.globals.get(s.getString()) == null) Settings.globals.set(s.getString(), s.getDefault());
@@ -280,5 +273,5 @@ public class InputOutput {
 		} catch (IOException e) {
 			// Failed to submit the stats :-(
 		}
-	}	
+	}
 }

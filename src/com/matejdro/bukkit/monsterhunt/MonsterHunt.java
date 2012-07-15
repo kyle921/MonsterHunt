@@ -1,6 +1,7 @@
 package com.matejdro.bukkit.monsterhunt;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.swing.Timer;
 
@@ -20,18 +21,20 @@ import com.matejdro.bukkit.monsterhunt.commands.HuntZoneCommand;
 import com.matejdro.bukkit.monsterhunt.listeners.MonsterHuntListener;
 
 public class MonsterHunt extends JavaPlugin {
+	public static Logger log = Logger.getLogger("Minecraft");
 	private MonsterHuntListener entityListener;
 	private static final String PLUGIN_NAME = "MonsterHunt";
 	Timer timer;
-
-	// public static HashMap<String,Integer> highscore = new HashMap<String,Integer>();
-
+	
+	//public static HashMap<String,Integer> highscore = new HashMap<String,Integer>();
+		
 	public static MonsterHunt instance;
-
+	
 	private HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 
 	@Override
 	public void onDisable() {
+		// TODO Auto-generated method stub
 		for (MonsterHuntWorld world : HuntWorldManager.getWorlds())
 			world.stop();
 	}
@@ -40,14 +43,14 @@ public class MonsterHunt extends JavaPlugin {
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = getDescription();
 		String version = pdfFile.getVersion();
-		initialize();
-
+		Log.info(PLUGIN_NAME + "v" + version + "Loaded!");
+		initialize();	
+		
 		InputOutput.LoadSettings();
 		InputOutput.PrepareDB();
-
+	
 		getServer().getPluginManager().registerEvents(entityListener, this);
-		Log.info(PLUGIN_NAME + " v" + version + " Loaded!");
-
+		
 		commands.put("huntstart", new HuntStartCommand());
 		commands.put("huntstop", new HuntStopCommand());
 		commands.put("hunt", new HuntCommand());
@@ -55,24 +58,27 @@ public class MonsterHunt extends JavaPlugin {
 		commands.put("huntstatus", new HuntStatusCommand());
 		commands.put("huntzone", new HuntZoneCommand());
 		commands.put("hunttele", new HuntTeleCommand());
-
+	
 		InputOutput.initMetrics();
-
+	
 		HuntWorldManager.timer();
-	}
 
+	}
+	
 	public static String getPluginName() {
 		return PLUGIN_NAME;
 	}
-
+	
 	private void initialize() {
 		entityListener = new MonsterHuntListener();
 		instance = this;
 	}
+    
+    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    	BaseCommand cmd = commands.get(command.getName().toLowerCase());
+    	if (cmd != null) return cmd.execute(sender, args);
+    	return false;
+    }
+    	
 
-	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		BaseCommand cmd = commands.get(command.getName().toLowerCase());
-		if (cmd != null) return cmd.execute(sender, args);
-		return false;
-	}
 }

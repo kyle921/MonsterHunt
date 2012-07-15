@@ -59,18 +59,20 @@ public class MonsterHuntListener implements Listener {
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			MonsterHuntWorld world = HuntWorldManager.getWorld(player.getWorld().getName());
-			
-			if (world == null || world.getWorld() == null) return;
-			if (world.settings.getInt(Setting.DeathPenalty) == 0) return;
-			
+
+			if (world == null || world.getWorld() == null) {
+				return;
+			}
+			if (world.settings.getInt(Setting.DeathPenalty) == 0) {
+				return;
+			}			
 			if (world.state > 1 && world.Score.containsKey(player.getName())) {
 				double score = world.Score.get(player.getName()) + 0.00;
 				score = score - (score * world.settings.getInt(Setting.DeathPenalty) / 100.00);	
 				world.Score.put(player.getName(), (int) Math.round(score));
 				Util.Message(world.settings.getString(Setting.DeathMessage),player);
 			}
-		}
-		
+		}		
 		if (!HuntZone.isInsideZone(event.getEntity().getLocation())) {
 			return;
 		}
@@ -83,13 +85,13 @@ public class MonsterHuntListener implements Listener {
 		}
 		Util.Debug("test");
 		kill((LivingEntity) event.getEntity(), world);
-		}
-	
+	}
+
 	private void kill(LivingEntity monster, MonsterHuntWorld world)	{
 		EntityDamageByEntityEvent event = (EntityDamageByEntityEvent) monster.getLastDamageCause();
 		String name;
 		Player player = null;
-		
+
 		String cause = "General";
 		if (event.getCause() == DamageCause.PROJECTILE && event.getDamager() instanceof Projectile)	{
 			if (event.getDamager() instanceof Snowball) {

@@ -32,5 +32,4 @@ public class HuntStartCommand extends BaseCommand {
 		world.manual = true;
 		return true;
 	}
-
 }
