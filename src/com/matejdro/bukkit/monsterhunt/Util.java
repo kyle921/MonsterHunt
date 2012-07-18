@@ -2,17 +2,11 @@ package com.matejdro.bukkit.monsterhunt;
 
 import java.util.ArrayList;
 
-import net.milkbowl.vault.permission.Permission;
-
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class Util {
-    public static Permission permission = null;
 
     public static void Message(String message, CommandSender sender) {
         if (sender instanceof Player) {
@@ -70,22 +64,7 @@ public class Util {
     }
 
     public static Boolean permission(Player player, String line, PermissionDefault def) {
-        Plugin plugin = MonsterHunt.instance.getServer().getPluginManager().getPlugin("Vault");
-        if (plugin != null && setupPermissions()) {
-            return permission.has(player, line);
-        } else {
-            return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
-        }
+        return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
     }
 
-    private static Boolean setupPermissions() {
-        if (permission != null)
-            return true;
-
-        RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-        if (permissionProvider != null) {
-            permission = permissionProvider.getProvider();
-        }
-        return (permission != null);
-    }
 }
