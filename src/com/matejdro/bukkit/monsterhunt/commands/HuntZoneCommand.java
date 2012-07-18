@@ -7,15 +7,15 @@ import com.matejdro.bukkit.monsterhunt.HuntZoneCreation;
 
 public class HuntZoneCommand extends BaseCommand {
 
-	public HuntZoneCommand() {
-		needPlayer = true;
-		permission = "monsterhunt.admincmd.huntzone";
-		adminCommand = true;
-	}
+    public HuntZoneCommand() {
+        needPlayer = true;
+        permission = "monsterhunt.admincmd.huntzone";
+        adminCommand = true;
+    }
 
-	public Boolean run(CommandSender sender, String[] args) {
-		HuntZoneCreation.selectstart((Player) sender);
-		return true;
-	}
+    public Boolean run(CommandSender sender, String[] args) {
+        HuntZoneCreation.selectstart((Player) sender);
+        return true;
+    }
 
 }
