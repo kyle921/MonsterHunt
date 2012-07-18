@@ -1,5 +1,7 @@
 package com.matejdro.bukkit.monsterhunt.commands;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
@@ -11,15 +13,13 @@ import com.matejdro.bukkit.monsterhunt.Setting;
 import com.matejdro.bukkit.monsterhunt.Settings;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntTeleCommand extends BaseCommand {
+public class HuntTeleCommand implements CommandExecutor {
 
-    public HuntTeleCommand() {
-        needPlayer = true;
-        permission = "monsterhunt.usercmd.hunttele";
-        adminCommand = false;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Sorry, but you need to execute this command as player.");
+            return true;
+        }
         Player player = (Player) sender;
         MonsterHuntWorld world = HuntWorldManager.getWorld(player.getWorld().getName());
         if (!Settings.globals.getBoolean(Setting.HuntZoneMode.getString(), false) || world == null || world.getWorld() == null)

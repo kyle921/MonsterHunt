@@ -1,5 +1,7 @@
 package com.matejdro.bukkit.monsterhunt.commands;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -8,15 +10,13 @@ import com.matejdro.bukkit.monsterhunt.MonsterHuntWorld;
 import com.matejdro.bukkit.monsterhunt.Setting;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntCommand extends BaseCommand {
+public class HuntCommand implements CommandExecutor {
 
-    public HuntCommand() {
-        needPlayer = true;
-        permission = "monsterhunt.usercmd.hunt";
-        adminCommand = false;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Sorry, but you need to execute this command as player.");
+            return true;
+        }
         MonsterHuntWorld world = HuntWorldManager.getWorld(((Player) sender).getWorld().getName());
         if (world == null || world.getWorld() == null)
             return true;

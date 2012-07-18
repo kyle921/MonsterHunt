@@ -1,5 +1,7 @@
 package com.matejdro.bukkit.monsterhunt.commands;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -9,15 +11,13 @@ import com.matejdro.bukkit.monsterhunt.Setting;
 import com.matejdro.bukkit.monsterhunt.Settings;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntStatusCommand extends BaseCommand {
+public class HuntStatusCommand implements CommandExecutor {
 
-    public HuntStatusCommand() {
-        needPlayer = true;
-        permission = "derphunt.usercmd.huntstatus";
-        adminCommand = false;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Sorry, but you need to execute this command as player.");
+            return true;
+        }
         Player player = (Player) sender;
         Boolean anyactive = false;
         String actives = "";

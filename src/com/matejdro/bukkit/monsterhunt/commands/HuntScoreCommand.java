@@ -2,21 +2,21 @@ package com.matejdro.bukkit.monsterhunt.commands;
 
 import java.util.LinkedHashMap;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.matejdro.bukkit.monsterhunt.InputOutput;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntScoreCommand extends BaseCommand {
+public class HuntScoreCommand implements CommandExecutor {
 
-    public HuntScoreCommand() {
-        needPlayer = true;
-        permission = "monsterhunt.usercmd.huntscore";
-        adminCommand = false;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("Sorry, but you need to execute this command as player.");
+            return true;
+        }
         if (args.length > 0 && args[0].equals("rank")) {
             Integer rank = InputOutput.getHighScoreRank(((Player) sender).getName());
             if (rank != null)

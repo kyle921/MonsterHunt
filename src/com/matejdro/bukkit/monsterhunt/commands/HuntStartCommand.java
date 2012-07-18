@@ -1,20 +1,16 @@
 package com.matejdro.bukkit.monsterhunt.commands;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.matejdro.bukkit.monsterhunt.HuntWorldManager;
 import com.matejdro.bukkit.monsterhunt.MonsterHuntWorld;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntStartCommand extends BaseCommand {
+public class HuntStartCommand implements CommandExecutor {
 
-    public HuntStartCommand() {
-        needPlayer = false;
-        permission = "monsterhunt.admincmd.huntstart";
-        adminCommand = true;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (args.length < 1 && HuntWorldManager.getWorlds().size() == 1) {
             String name = "";
             for (MonsterHuntWorld w : HuntWorldManager.getWorlds())

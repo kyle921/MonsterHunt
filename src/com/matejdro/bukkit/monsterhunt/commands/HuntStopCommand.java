@@ -1,5 +1,7 @@
 package com.matejdro.bukkit.monsterhunt.commands;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.matejdro.bukkit.monsterhunt.HuntWorldManager;
@@ -8,15 +10,9 @@ import com.matejdro.bukkit.monsterhunt.Setting;
 import com.matejdro.bukkit.monsterhunt.Settings;
 import com.matejdro.bukkit.monsterhunt.Util;
 
-public class HuntStopCommand extends BaseCommand {
+public class HuntStopCommand implements CommandExecutor {
 
-    public HuntStopCommand() {
-        needPlayer = false;
-        permission = "monsterhunt.admincmd.huntstop";
-        adminCommand = true;
-    }
-
-    public Boolean run(CommandSender sender, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if (args.length < 1 && Settings.globals.getBoolean(Setting.HuntZoneMode.getString(), false)) {
             args = new String[] { "something" };
         } else if (args.length < 1) {

@@ -7,20 +7,25 @@ softdepend: [Vault, Permissions]
 commands:
     hunt:
         description: Sign up for the hunt.
-    huntstatus:
-        description: Check the hunt status
+        permission: monsterhunt.usercmd.hunt
     huntscore:
         description: Check your current high score
+        permission: monsterhunt.usercmd.huntscore
     huntstart:
         description: Start hunt manually.
+        permission: monsterhunt.admincmd.huntstart
+    huntstatus:
+        description: Check the hunt status
+        permission: monsterhunt.usercmd.huntstatus
     huntstop:
         description: Stop hunt manually
-    hunt:
-        description: Sign up for the hunt.
-    huntzone:
-        description: Select hunt zone.
+        permission: monsterhunt.admincmd.huntstop
     hunttele:
         description: Teleport to the hunt zone
+        permission: monsterhunt.usercmd.hunttele
+    huntzone:
+        description: Select hunt zone.
+        permission: monsterhunt.admincmd.huntzone
 permissions:
     monsterhunt.*:
         children:

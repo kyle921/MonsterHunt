@@ -1,16 +1,12 @@
 package com.matejdro.bukkit.monsterhunt;
 
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.swing.Timer;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.matejdro.bukkit.monsterhunt.commands.BaseCommand;
 import com.matejdro.bukkit.monsterhunt.commands.HuntCommand;
 import com.matejdro.bukkit.monsterhunt.commands.HuntScoreCommand;
 import com.matejdro.bukkit.monsterhunt.commands.HuntStartCommand;
@@ -30,11 +26,8 @@ public class MonsterHunt extends JavaPlugin {
 
     public static MonsterHunt instance;
 
-    private HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
-
     @Override
     public void onDisable() {
-        // TODO Auto-generated method stub
         for (MonsterHuntWorld world : HuntWorldManager.getWorlds())
             world.stop();
     }
@@ -51,13 +44,13 @@ public class MonsterHunt extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(entityListener, this);
 
-        commands.put("huntstart", new HuntStartCommand());
-        commands.put("huntstop", new HuntStopCommand());
-        commands.put("hunt", new HuntCommand());
-        commands.put("huntscore", new HuntScoreCommand());
-        commands.put("huntstatus", new HuntStatusCommand());
-        commands.put("huntzone", new HuntZoneCommand());
-        commands.put("hunttele", new HuntTeleCommand());
+        this.getCommand("hunt").setExecutor(new HuntCommand());
+        this.getCommand("huntscore").setExecutor(new HuntScoreCommand());
+        this.getCommand("huntstart").setExecutor(new HuntStartCommand());
+        this.getCommand("huntstatus").setExecutor(new HuntStatusCommand());
+        this.getCommand("huntstop").setExecutor(new HuntStopCommand());
+        this.getCommand("huntzone").setExecutor(new HuntZoneCommand());
+        this.getCommand("hunttele").setExecutor(new HuntTeleCommand());
 
         InputOutput.initMetrics();
 
@@ -72,13 +65,6 @@ public class MonsterHunt extends JavaPlugin {
     private void initialize() {
         entityListener = new MonsterHuntListener();
         instance = this;
-    }
-
-    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-        BaseCommand cmd = commands.get(command.getName().toLowerCase());
-        if (cmd != null)
-            return cmd.execute(sender, args);
-        return false;
     }
 
 }
