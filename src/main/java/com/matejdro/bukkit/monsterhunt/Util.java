@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionDefault;
 
 public class Util {
 
@@ -61,10 +60,6 @@ public class Util {
         if (world.settings.getInt(Setting.SkipToIfFailsToStart) >= 0) {
             world.getWorld().setTime(world.settings.getInt(Setting.SkipToIfFailsToStart));
         }
-    }
-
-    public static Boolean permission(Player player, String line, PermissionDefault def) {
-        return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
     }
 
 }

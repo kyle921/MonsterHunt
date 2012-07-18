@@ -10,7 +10,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -73,7 +72,7 @@ public class RewardManager {
                 if (RewardString.contains(";")) {
                     RewardString = PickRandom(RewardString);
                 }
-                if (world.settings.getBoolean(Setting.RewardEveryone) || (Util.permission(player, "monsterhunt.rewardeverytime", PermissionDefault.FALSE) && world.settings.getBoolean(Setting.EnableRewardEveryonePermission))) {
+                if (world.settings.getBoolean(Setting.RewardEveryone) || (player.hasPermission("monsterhunt.rewardeverytime") && world.settings.getBoolean(Setting.EnableRewardEveryonePermission))) {
                     Reward((String) i.getKey(), RewardString, world, (Integer) i.getValue());
                 }
             }
@@ -128,7 +127,7 @@ public class RewardManager {
 
             //Parse block amount
             String rv = i2.substring(i2.indexOf(" ") + 1);
-            Boolean RelativeReward = false;
+            boolean RelativeReward = false;
             if (rv.startsWith("R")) {
                 RelativeReward = true;
                 rv = rv.substring(1);
@@ -330,7 +329,7 @@ public class RewardManager {
         }
     }
 
-    private static Boolean setupEconomy() {
+    private static boolean setupEconomy() {
         if (economy != null)
             return true;
 

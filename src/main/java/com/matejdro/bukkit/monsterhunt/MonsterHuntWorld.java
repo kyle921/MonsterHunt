@@ -10,11 +10,11 @@ import org.bukkit.entity.Player;
 
 public class MonsterHuntWorld {
     public String name;
-    public Boolean manual;
+    public boolean manual;
     public int state;
-    public Boolean waitday;
+    public boolean waitday;
     public int curday;
-    public Boolean nextnight;
+    public boolean nextnight;
     public Settings settings;
 
     public HashMap<String, Integer> Score = new HashMap<String, Integer>();
@@ -100,7 +100,7 @@ public class MonsterHuntWorld {
         }
     }
 
-    public Boolean canStart() {
+    public boolean canStart() {
         if (curday == 0) {
             curday = settings.getInt(Setting.SkipDays);
             if ((new Random().nextInt(100)) < settings.getInt(Setting.StartChance)) {

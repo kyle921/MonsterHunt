@@ -81,7 +81,7 @@ public class InputOutput {
         Connection conn = getConnection();
         PreparedStatement ps = null;
         ResultSet set = null;
-        Boolean exist = false;
+        boolean exist = false;
         Integer counter = 0;
 
         try {

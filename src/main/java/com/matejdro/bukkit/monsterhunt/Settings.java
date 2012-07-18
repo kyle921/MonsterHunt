@@ -41,12 +41,8 @@ public class Settings {
         return property;
     }
 
-    public Boolean getBoolean(Setting setting) {
-        Boolean property = (Boolean) config.get(setting.getString());
-        if (property == null) {
-            property = (Boolean) globals.get(setting.getString());
-        }
-        return property;
+    public boolean getBoolean(Setting setting) {
+        return config.getBoolean(setting.getString(), globals.getBoolean(setting.getString()));
     }
 
     public int getPlaceInt(Setting setting, int place) {

@@ -7,7 +7,7 @@ public class HuntZone {
     public static Location corner2;
     public static Location teleport;
 
-    public static Boolean isInsideZone(Location loc) {
+    public static boolean isInsideZone(Location loc) {
         if (!Settings.globals.getBoolean(Setting.HuntZoneMode.getString(), false)) {
             return true;
         }
@@ -18,7 +18,7 @@ public class HuntZone {
         return false;
     }
 
-    private static Boolean isBetween(double x, double y, double n) {
+    private static boolean isBetween(double x, double y, double n) {
         if ((x < y) && x <= n && y >= n) {
             return true;
         } else if ((x > y) && x >= n && y <= n) {

@@ -278,7 +278,7 @@ public class MonsterHuntListener implements Listener {
             while (block.getY() < 125) {
                 number++;
                 block = block.getRelative(BlockFace.UP);
-                Boolean empty = false;
+                boolean empty = false;
 
                 if (block.getType() == Material.AIR || block.getType() == Material.LEAVES) {
                     empty = true;

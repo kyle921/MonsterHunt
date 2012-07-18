@@ -19,7 +19,7 @@ public class HuntStatusCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        Boolean anyactive = false;
+        boolean anyactive = false;
         String actives = "";
         for (MonsterHuntWorld world : HuntWorldManager.getWorlds()) {
             if (world.state > 0) {

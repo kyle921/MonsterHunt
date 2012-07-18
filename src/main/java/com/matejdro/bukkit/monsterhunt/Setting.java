@@ -75,7 +75,7 @@ public enum Setting {
 
     private String name;
     private Object def;
-    private Boolean WriteDefault;
+    private boolean WriteDefault;
 
     private Setting(String Name, Object Def) {
         name = Name;
@@ -83,7 +83,7 @@ public enum Setting {
         WriteDefault = true;
     }
 
-    private Setting(String Name, Object Def, Boolean WriteDefault) {
+    private Setting(String Name, Object Def, boolean WriteDefault) {
         name = Name;
         def = Def;
         this.WriteDefault = WriteDefault;
@@ -97,7 +97,7 @@ public enum Setting {
         return def;
     }
 
-    public Boolean writeDefault() {
+    public boolean writeDefault() {
         return WriteDefault;
     }
 }
