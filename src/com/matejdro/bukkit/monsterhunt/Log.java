@@ -1,33 +1,20 @@
 package com.matejdro.bukkit.monsterhunt;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.bukkit.Bukkit;
 
 public class Log {
-    private static String pre = "[" + MonsterHunt.getPluginName() + "] ";
-    private static final Logger LOG = Logger.getLogger("Minecraft");
-
-    private Log() {
-
-    }
+    private static String pre = "[MonsterHunt] ";
 
     public static void info(String message) {
-        LOG.log(Level.INFO, pre + message);
+        Bukkit.getLogger().info(pre + message);
     }
 
-    public static void warnings(String message) {
-        LOG.log(Level.WARNING, pre + message);
+    public static void warning(String message) {
+        Bukkit.getLogger().warning(pre + message);
     }
 
     public static void severe(String message) {
-        LOG.log(Level.SEVERE, pre + message);
+        Bukkit.getLogger().severe(pre + message);
     }
 
-    public static Logger getLogger() {
-        return LOG;
-    }
-
-    public static String getPrefix() {
-        return pre;
-    }
 }

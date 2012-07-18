@@ -19,7 +19,6 @@ import com.matejdro.bukkit.monsterhunt.listeners.MonsterHuntListener;
 public class MonsterHunt extends JavaPlugin {
     public static Logger log = Logger.getLogger("Minecraft");
     private MonsterHuntListener entityListener;
-    private static final String PLUGIN_NAME = "MonsterHunt";
     Timer timer;
 
     //public static HashMap<String,Integer> highscore = new HashMap<String,Integer>();
@@ -36,7 +35,7 @@ public class MonsterHunt extends JavaPlugin {
     public void onEnable() {
         PluginDescriptionFile pdfFile = getDescription();
         String version = pdfFile.getVersion();
-        Log.info(PLUGIN_NAME + "v" + version + "Loaded!");
+        this.getLogger().info("v" + version + "Loaded!");
         initialize();
 
         InputOutput.LoadSettings();
@@ -56,10 +55,6 @@ public class MonsterHunt extends JavaPlugin {
 
         HuntWorldManager.timer();
 
-    }
-
-    public static String getPluginName() {
-        return PLUGIN_NAME;
     }
 
     private void initialize() {

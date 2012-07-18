@@ -182,13 +182,13 @@ public class RewardManager {
         Plugin test = plugin.getServer().getPluginManager().getPlugin("Vault");
         if (test != null) {
             if (!setupEconomy()) {
-                Log.warnings("You have economy rewards enabled, but don't have any economy plugin installed!");
+                Log.warning("You have economy rewards enabled, but don't have any economy plugin installed!");
                 return "";
             }
             economy.depositPlayer(player, number);
             return economy.format(number);
         } else {
-            Log.warnings("You have economy rewards enabled, but don't have Vault plugin installed! Some players may not get their reward! See http://dev.bukkit.org/server-mods/vault/");
+            Log.warning("You have economy rewards enabled, but don't have Vault plugin installed! Some players may not get their reward! See http://dev.bukkit.org/server-mods/vault/");
             return "";
         }
     }
@@ -210,7 +210,7 @@ public class RewardManager {
         }
 
         if (totalchances > (100 - numnochances)) {
-            Log.warnings("Invalid Rewards configuration! Sum of all percentages should be exactly 100! MonsterHunt will now throw error and disable itself.");
+            Log.warning("Invalid Rewards configuration! Sum of all percentages should be exactly 100! MonsterHunt will now throw error and disable itself.");
             plugin.getPluginLoader().disablePlugin(plugin);
             return null;
         }

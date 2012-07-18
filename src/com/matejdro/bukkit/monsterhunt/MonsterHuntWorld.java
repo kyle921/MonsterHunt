@@ -40,7 +40,7 @@ public class MonsterHuntWorld {
         if (time != 0) {
             time = settings.getInt(Setting.StartTime) - settings.getInt(Setting.SignUpPeriodTime) * 1200;
             if (time < 0) {
-                Log.warnings("Wrong SignUpPeriodTime Configuration! Sign Up period will be disabled!");
+                Log.warning("Wrong SignUpPeriodTime Configuration! Sign Up period will be disabled!");
                 time = 0;
             }
         }
