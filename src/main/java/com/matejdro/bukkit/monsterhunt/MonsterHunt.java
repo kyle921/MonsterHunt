@@ -50,7 +50,7 @@ public class MonsterHunt extends JavaPlugin {
         this.getCommand("huntstop").setExecutor(new HuntStopCommand());
         this.getCommand("huntzone").setExecutor(new HuntZoneCommand());
         this.getCommand("hunttele").setExecutor(new HuntTeleCommand());
-
+        //removed metrics, because A. its of no use to myself, B. To make it work on bukkit R0.3
         //InputOutput.initMetrics();
 
         HuntWorldManager.timer();
