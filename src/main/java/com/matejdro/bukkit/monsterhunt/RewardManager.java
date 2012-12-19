@@ -1,9 +1,11 @@
 package com.matejdro.bukkit.monsterhunt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
@@ -39,22 +41,34 @@ public class RewardManager {
         }
         String RewardString;
 
+        // keep track of players we reward so we don't reward them again
+        // in the RewardEveryone section
+        final ArrayList<String> rewardedPlayers = new ArrayList<String>();
+        
+        final boolean enableReward=world.settings.getBoolean(Setting.EnableReward);
+        Util.Debug("EnabledReward="+enableReward);
         //Normal reward
-        if (world.settings.getBoolean(Setting.EnableReward)) {
+        if (enableReward) {
             for (int place = 0; place < num; place++) {
+                Util.Debug("Checking place "+place);
                 if (Winners[place].size() < 1)
                     continue;
                 score = Winners[place].get(Winners[place].keySet().toArray()[0]);
-                Util.Debug(String.valueOf(score));
-                Util.Debug(String.valueOf(world.settings.getPlaceInt(Setting.MinimumPointsPlace, place + 1)));
-                if (score < world.settings.getPlaceInt(Setting.MinimumPointsPlace, place + 1)) {
-                    Winners[place].clear();
-                    for (String i : Winners[place].keySet()) {
+                Util.Debug("score="+String.valueOf(score));
+                Util.Debug("minscore="+String.valueOf(world.settings.getPlaceInt(Setting.MinimumPointsPlace, place + 1)));
+                if (score >= world.settings.getPlaceInt(Setting.MinimumPointsPlace, place + 1)) {
+//                    Winners[place].clear();
+                    Util.Debug("score is >= minscore");
+                    for (String playerName : Winners[place].keySet()) {
+                        Util.Debug("player="+playerName);
                         RewardString = world.settings.getPlaceString(Setting.RewardParametersPlace, place + 1);
                         if (RewardString.contains(";")) {
                             RewardString = PickRandom(RewardString);
                         }
-                        Reward(i, RewardString, world, score);
+                        Util.Debug("RewardString="+RewardString);
+                        Reward(playerName, RewardString, world, score);
+                        
+                        rewardedPlayers.add(playerName);
                     }
                 }
             }
@@ -68,6 +82,11 @@ public class RewardManager {
                 Player player = plugin.getServer().getPlayer((String) i.getKey());
                 if (player == null)
                     continue;
+                
+                // don't reward "everyone" reward if they already won a top award
+                if( rewardedPlayers.contains(player.getName()) )
+                	continue;
+                
                 RewardString = world.settings.getString(Setting.RewardParametersEveryone);
                 if (RewardString.contains(";")) {
                     RewardString = PickRandom(RewardString);
@@ -106,75 +125,89 @@ public class RewardManager {
     }
 
     private static void Reward(String playerstring, String RewardString, MonsterHuntWorld world, int score) {
-        String[] split = RewardString.split(",");
-        Player player = plugin.getServer().getPlayer(playerstring);
-        if (player == null)
-            return;
-        String items = "";
-        for (String i2 : split) {
-            Util.Debug(i2);
-            //Parse block ID
-            String BlockIdString = i2.substring(0, i2.indexOf(" "));
-            short data;
-            int BlockId;
-            if (BlockIdString.contains(":")) {
-                BlockId = Integer.valueOf(BlockIdString.substring(0, i2.indexOf(":")));
-                data = Short.valueOf(BlockIdString.substring(i2.indexOf(":") + 1));
-            } else {
-                BlockId = Integer.valueOf(BlockIdString);
-                data = 0;
-            }
+    	Util.Debug("Rewarding "+playerstring);
+    	Util.Debug("RewardString="+RewardString);
+    	String[] split = RewardString.split(",");
+    	Player player = plugin.getServer().getPlayer(playerstring);
+    	if (player == null)
+    		return;
+    	for (String i2 : split) {
+        	String items = "";
+    		Util.Debug("Reward i2="+i2);
+    		//Parse block ID
+    		String BlockIdString = i2.substring(0, i2.indexOf(" "));
+    		short data;
+    		int BlockId;
+    		if (BlockIdString.contains(":")) {
+    			BlockId = Integer.valueOf(BlockIdString.substring(0, i2.indexOf(":")));
+    			data = Short.valueOf(BlockIdString.substring(i2.indexOf(":") + 1));
+    		} else {
+    			BlockId = Integer.valueOf(BlockIdString);
+    			data = 0;
+    		}
 
-            //Parse block amount
-            String rv = i2.substring(i2.indexOf(" ") + 1);
-            boolean RelativeReward = false;
-            if (rv.startsWith("R")) {
-                RelativeReward = true;
-                rv = rv.substring(1);
-            }
-            int StartValue, EndValue;
-            if (rv.contains("-")) {
-                StartValue = (int) Math.round(Double.valueOf(rv.substring(0, rv.indexOf("-"))) * 100.0);
-                EndValue = (int) Math.round(Double.valueOf(rv.substring(rv.indexOf("-") + 1)) * 100.0);
-            } else {
-                StartValue = (int) Math.round(Double.valueOf(rv) * 100.0);
-                EndValue = StartValue;
-            }
-            int random;
-            if (EndValue == StartValue) {
-                random = EndValue;
-            } else {
-                {
-                    random = new Random().nextInt(EndValue - StartValue) + StartValue;
-                }
-                double number = random / 100.0;
-                if (RelativeReward) {
-                    number *= score;
-                }
-                int amount = (int) Math.round(number);
-
-                //give reward
-                if (BlockId == 0) {
-                    String item = iConomyReward(playerstring, amount);
-                    if (amount > 0) {
-                        items += item + ", ";
-                    }
-                } else {
-                    addItemFix(player, BlockId, amount, data);
-                    if (amount > 0) {
-                        items += String.valueOf(amount) + "x " + getMaterialName(Material.getMaterial(BlockId)) + ", ";
-                    }
-                    //plugin.getServer().getPlayer(i).giveItem(BlockId,amount);
-                }
-            }
-            if (items.trim() == "") {
-                return;
-            }
-            String message = world.settings.getString(Setting.RewardMessage);
-            items = items.substring(0, items.length() - 2);
-            message = message.replace("<Items>", items);
-            Util.Message(message, player);
-        }
+    		//Parse block amount
+    		String rv = i2.substring(i2.indexOf(" ") + 1);
+    		boolean RelativeReward = false;
+    		if (rv.startsWith("R")) {
+    			RelativeReward = true;
+    			rv = rv.substring(1);
+    		}
+    		
+    		int StartValue, EndValue;
+    		if (rv.contains("-")) {
+    			StartValue = (int) Math.round(Double.valueOf(rv.substring(0, rv.indexOf("-"))) * 100.0);
+    			EndValue = (int) Math.round(Double.valueOf(rv.substring(rv.indexOf("-") + 1)) * 100.0);
+    		} else {
+    			StartValue = (int) Math.round(Double.valueOf(rv) * 100.0);
+    			EndValue = StartValue;
+    		}
+    		
+    		int random=0;
+    		if (EndValue == StartValue) {
+    			random = EndValue;
+    		}
+    		else {
+				random = new Random().nextInt(EndValue - StartValue) + StartValue;
+    		}
+    		
+			if( random > 0 ) {
+	    		double number = random / 100.0;
+	    		if (RelativeReward) {
+	    			number *= score;
+	    		}
+	    		int amount = (int) Math.round(number);
+	
+	    		//give reward
+	    		if (BlockId == 0) {
+	    			Util.Debug("rewarding iConomy amount="+amount);
+	    			String item = iConomyReward(playerstring, amount);
+	    			if (amount > 0) {
+	    				items += item + ", ";
+	    			}
+	    		} else if( amount > 0 ) {
+	    			Util.Debug("rewarding blockId of "+BlockId+", amount="+amount+", data="+data);
+	    			addItemFix(player, BlockId, amount, data);
+	    			if (amount > 0) {
+	    				items += String.valueOf(amount) + "x " + getMaterialName(Material.getMaterial(BlockId)) + ", ";
+	    			}
+	    			//plugin.getServer().getPlayer(i).giveItem(BlockId,amount);
+	    		}
+	    		else {
+					Util.Debug("blockId was "+BlockId+", amount was 0, no reward given");
+	    		}
+			}
+			else
+				Util.Debug("random value was 0, no rewards given");
+    		
+    		if (items.trim() == "") {
+    			return;
+    		}
+    		String message = world.settings.getString(Setting.RewardMessage);
+    		items = items.substring(0, items.length() - 2);
+    		message = message.replace("<Items>", items);
+    		Util.Message(message, player);
+    	}
     }
 
     private static String iConomyReward(String player, int number) {

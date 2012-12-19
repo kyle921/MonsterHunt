@@ -25,7 +25,7 @@ public enum Setting {
     EnableReward("Rewards.EnableReward", true),
     EnableRewardEveryonePermission("Rewards.EnableRewardEveryonePermission", false),
     RewardEveryone("Rewards.RewardEveryone", false),
-    NumberOfWinners("Rewards.NumberOFWinners", 3),
+    NumberOfWinners("Rewards.NumberOfWinners", 3),
     RewardParametersEveryone("Rewards.RewardParametersEveryone", "3 1-1"),
     MinimumPointsEveryone("MinimumPointsEveryone", 1),
     MinimumPointsPlace("MinimumPointsPlace", "", false),
