@@ -51,7 +51,7 @@ public class MonsterHunt extends JavaPlugin {
         this.getCommand("huntzone").setExecutor(new HuntZoneCommand());
         this.getCommand("hunttele").setExecutor(new HuntTeleCommand());
 
-        InputOutput.initMetrics();
+        //InputOutput.initMetrics();
 
         HuntWorldManager.timer();
 

@@ -17,8 +17,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class InputOutput {
     private static Connection connection;
-    private static MonsterHunt plugin = MonsterHunt.instance;
-
     public static synchronized Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -266,14 +264,14 @@ public class InputOutput {
         } catch (SQLException e) {
             Log.severe("Error while creating tables! - " + e.getMessage());
         }
-    }
+    //}
 
-    public static void initMetrics() {
-        try {
-            MetricsLite metrics = new MetricsLite(plugin);
-            metrics.start();
-        } catch (IOException e) {
+    //public static void initMetrics() {
+    //    try {
+    //        MetricsLite metrics = new MetricsLite(plugin);
+    //        metrics.start();
+    //    } catch (IOException e) {
             // Failed to submit the stats :-(
-        }
+    //    }
     }
 }
