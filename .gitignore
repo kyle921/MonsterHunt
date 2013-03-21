@@ -6,3 +6,7 @@ bin/
 .project
 *.class
 .DS_Store
+
+*.class
+
+*.class
