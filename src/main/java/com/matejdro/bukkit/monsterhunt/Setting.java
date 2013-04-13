@@ -56,7 +56,7 @@ public enum Setting {
     HighScoreMessage("Messages.HighScoreMessage", "You have reached a new high score: <Points> points!"),
     FinishMessageNotEnoughPoints("Messages.FinishMessageNotEnoughPoints", "Sun is rising, so monster Hunt is finished in world <World>! Unfortunately nobody killed enough monsters, so there is no winner."),
     FinishMessageNotEnoughPlayers("Messages.FinishMessageNotEnoughPlayers", "Sun is rising, so monster Hunt is finished in world <World>! Unfortunately there were not enough players participating, so there is no winner."),
-    MessageSignUpPeriod("Messages.MessageSignUpPeriod", "Sharpen your swords, strengthen your armor and type /hunt, because Monster Hunt will begin in several mintues in world <World>!"),
+    MessageSignUpPeriod("Messages.MessageSignUpPeriod", "Sharpen your swords, strengthen your armor and type /hunt, because Monster Hunt will begin in several minutes in world <World>!"),
     MessageTooLateSignUp("Messages.MessageTooLateSignUp", "Sorry, you are too late to sign up. More luck next time!"),
     MessageAlreadySignedUp("Messages.MessageAlreadySignedUp", "You are already signed up!"),
     MessageStartNotEnoughPlayers("Messages.MessageStartNotEnoughPlayers", "Monster Hunt was about to start, but unfortunately there were not enough players signed up. "),
