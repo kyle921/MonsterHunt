@@ -10,3 +10,5 @@ bin/
 *.class
 
 *.class
+
+target/MonsterHunt.jar
