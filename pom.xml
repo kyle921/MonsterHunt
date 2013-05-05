@@ -4,7 +4,7 @@
   <groupId>org.kitteh</groupId>
   <artifactId>monsterhunt</artifactId>
   <packaging>jar</packaging>
-  <version>1.5.6</version>
+  <version>1.5.7-SNAPSHOT</version>
   <name>MonsterHunt</name>
   <url>https://github.com/computerxpds/MonsterHunt</url>
 
@@ -36,7 +36,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.5.1-R0.2</version>
+      <version>1.5.2-R0.1</version>
     </dependency>
     <dependency>
       <groupId>net.milkbowl</groupId>
