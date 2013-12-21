@@ -4,7 +4,7 @@
   <groupId>org.kitteh</groupId>
   <artifactId>monsterhunt</artifactId>
   <packaging>jar</packaging>
-  <version>1.5.5-SNAPSHOT</version>
+  <version>1.5.7-SNAPSHOT</version>
   <name>MonsterHunt</name>
   <url>https://github.com/computerxpds/MonsterHunt</url>
 
@@ -27,17 +27,21 @@
       <id>spout-repo</id>
       <url>http://nexus.spout.org/content/groups/public/</url>
     </repository>
+    <repository>
+	  <id>vault-repo</id>
+	  <url>http://ci.herocraftonline.com/plugin/repository/everything</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.4.7-R1.0</version>
+      <version>1.6.4-R2.0</version>
     </dependency>
     <dependency>
       <groupId>net.milkbowl</groupId>
       <artifactId>vault</artifactId>
-      <version>1.2.23-SNAPSHOT</version>
+      <version>1.2.25-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
