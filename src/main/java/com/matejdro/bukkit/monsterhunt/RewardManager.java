@@ -187,7 +187,8 @@ public class RewardManager {
 	    			}
 	    		} else if( amount > 0 ) {
 	    			Util.Debug("rewarding blockId of "+BlockId+", amount="+amount+", data="+data);
-	    			addItemFix(player, BlockId, amount, data);
+	    			Material mat = Material.getMaterial(BlockId);
+	    			addItemFix(player, mat, amount, data);
 	    			if (amount > 0) {
 	    				items += String.valueOf(amount) + "x " + getMaterialName(Material.getMaterial(BlockId)) + ", ";
 	    			}
@@ -317,13 +318,13 @@ public class RewardManager {
     }
 
     //add item color by fabe
-    public static void addItemFix(Player players, int ID, int amount, short dur) {
+    public static void addItemFix(Player players, Material mat, int amount, short dur) {
         if (players.getInventory().firstEmpty() == -1) {
-            players.getLocation().getWorld().dropItem(players.getLocation(), new ItemStack(ID, amount, dur));
+        	players.getLocation().getWorld().dropItem(players.getLocation(), new ItemStack(mat, amount, dur));
             return;
         }
-        if (players.getInventory().contains(ID) && (ID == 35 || ID == 351)) { // Wool or Dye
-            HashMap<Integer, ? extends ItemStack> invItems = players.getInventory().all(ID);
+        if (players.getInventory().contains(mat) && (mat == Material.WOOL || mat == Material.INK_SACK)) { // Wool or Dye
+        	HashMap<Integer, ? extends ItemStack> invItems = players.getInventory().all(mat);
 
             int restAmount = amount;
             for (Map.Entry<Integer, ? extends ItemStack> entry : invItems.entrySet()) {
@@ -347,18 +348,18 @@ public class RewardManager {
                             giveAmount = canGiveAmount;
                             restAmount = restAmount - giveAmount;
                         }
-                        players.getInventory().setItem(index, new ItemStack(ID, stackAmount + giveAmount, dur));
+                        players.getInventory().setItem(index, new ItemStack(mat, stackAmount + giveAmount, dur));
                     }
                 }
             }
             // If there is still a rest, add the rest to the inventory
             if (restAmount > 0) {
                 int emptySlot = players.getInventory().firstEmpty();
-                players.getInventory().setItem(emptySlot, new ItemStack(ID, restAmount, dur));
+                players.getInventory().setItem(emptySlot, new ItemStack(mat, restAmount, dur));
             }
         } else {
             // Standard usage of addItem
-            players.getInventory().addItem(new ItemStack(ID, amount, dur));
+        	players.getInventory().addItem(new ItemStack(mat, amount, dur));
         }
     }
 
