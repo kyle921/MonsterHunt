@@ -29,7 +29,7 @@ public class HuntTeleCommand implements CommandExecutor {
         if (world.state == 0 && permission) {
             Util.Message(world.settings.getString(Setting.MessageHuntTeleNoHunt), player);
             return true;
-        } else if (world.Score.containsKey(player.getName()) && world.settings.getBoolean(Setting.EnableSignup) && permission) {
+        } else if (!world.Score.containsKey(player.getName()) && world.settings.getBoolean(Setting.EnableSignup) && permission) {
             Util.Message(world.settings.getString(Setting.MessageHuntTeleNotSignedUp), player);
             return true;
         }

@@ -83,7 +83,6 @@ public class MonsterHuntListener implements Listener {
         if (world == null || world.getWorld() == null || world.state < 2) {
             return;
         }
-        Util.Debug("test");
         kill((LivingEntity) event.getEntity(), world);
     }
 

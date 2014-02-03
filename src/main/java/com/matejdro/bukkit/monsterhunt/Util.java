@@ -66,7 +66,7 @@ public class Util {
 
     public static void Debug(String message) {
         if (Settings.globals.getBoolean(Setting.Debug.getString(), false)) {
-            Log.info("[Debug]" + message);
+            Log.info("[Debug] " + message);
         }
     }
 
