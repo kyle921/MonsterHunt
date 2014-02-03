@@ -6,26 +6,22 @@
   <packaging>jar</packaging>
   <version>1.5.7-SNAPSHOT</version>
   <name>MonsterHunt</name>
-  <url>https://github.com/computerxpds/MonsterHunt</url>
+  <url>https://github.com/kyle921/MonsterHunt</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <scm>
-    <connection>scm:git:git@github.com:computerxpds/MonsterHunt.git</connection>
-    <developerConnection>scm:git:git@github.com:computerxpds/MonsterHunt.git</developerConnection>
-    <url>https://github.com/computerxpds/MonsterHunt</url>
+    <connection>scm:git:git@github.com:kyle921/MonsterHunt.git</connection>
+    <developerConnection>scm:git:git@github.com:kyle921/MonsterHunt.git</developerConnection>
+    <url>https://github.com/kyle921/MonsterHunt</url>
   </scm>
 
   <repositories>
     <repository>
       <id>bukkit-repo</id>
       <url>http://repo.bukkit.org/content/groups/public</url>
-    </repository>
-    <repository>
-      <id>spout-repo</id>
-      <url>http://nexus.spout.org/content/groups/public/</url>
     </repository>
     <repository>
 	  <id>vault-repo</id>
@@ -36,12 +32,12 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.6.4-R2.0</version>
+      <version>1.7.2-R0.2</version>
     </dependency>
     <dependency>
-      <groupId>net.milkbowl</groupId>
-      <artifactId>vault</artifactId>
-      <version>1.2.25-SNAPSHOT</version>
+      <groupId>net.milkbowl.vault</groupId>
+      <artifactId>Vault</artifactId>
+      <version>1.2.31</version>
     </dependency>
   </dependencies>
 

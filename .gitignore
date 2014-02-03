@@ -1,14 +1,9 @@
-/target/classes/
 .settings/
 doc/
 bin/
 .classpath
 .project
-*.class
 .DS_Store
 
-*.class
-
-*.class
-
-target/MonsterHunt.jar
+target/*
+target
