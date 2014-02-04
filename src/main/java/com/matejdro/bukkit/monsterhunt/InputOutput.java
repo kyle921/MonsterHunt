@@ -264,14 +264,5 @@ public class InputOutput {
         } catch (SQLException e) {
             Log.severe("Error while creating tables! - " + e.getMessage());
         }
-    //}
-
-    //public static void initMetrics() {
-    //    try {
-    //        MetricsLite metrics = new MetricsLite(plugin);
-    //        metrics.start();
-    //    } catch (IOException e) {
-            // Failed to submit the stats :-(
-    //    }
     }
 }
