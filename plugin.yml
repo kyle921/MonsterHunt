@@ -51,13 +51,13 @@ permissions:
     monsterhunt.admincmd.huntzone:
         default: op
     monsterhunt.usercmd.hunt:
-        default: true
+        default: false
     monsterhunt.usercmd.huntscore:
         default: true
     monsterhunt.usercmd.huntstatus:
         default: true
     monsterhunt.usercmd.hunttele:
-        default: true
+        default: false
     monsterhunt.rewardeverytime:
         default: false
     monsterhunt.noteleportrestrictions:
