@@ -197,18 +197,27 @@ public class InputOutput {
             e1.printStackTrace();
         }
 
-        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "ZombiePigman", "Giant", "TamedWolf", "WildWolf", "ElectrifiedCreeper", "Player", "Enderman", "Silverfish", "CaveSpider", "EnderDragon", "MagmaCube", "Blaze", "Guardian" }) {
+        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "TamedWolf", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
             Settings.globals.set("Value." + i + ".General", 10);
-            Settings.globals.set("Value." + i + ".Wolf", 7);
-            Settings.globals.set("Value." + i + ".Arrow", 4);
-            Settings.globals.set("Value." + i + ".Snowball", 20);
-            Settings.globals.set("Value." + i + ".283", 15);
+            Settings.globals.set("Value." + i + ".Wolf", 5);
+            Settings.globals.set("Value." + i + ".Arrow", 6);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
         }
+        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "ElectrifiedCreeper", "Enderman", "CaveSpider", "EnderDragon", "Blaze", "Witch", "Wither"}) {
+            if (Settings.globals.get("Value." + i) != null)
+                continue;
 
-        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "PolarBear" }) {
+            Settings.globals.set("Value." + i + ".General", 15);
+            Settings.globals.set("Value." + i + ".Wolf", 8);
+            Settings.globals.set("Value." + i + ".Arrow", 10);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
+        }
+        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "PolarBear", "Player", "Giant" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 

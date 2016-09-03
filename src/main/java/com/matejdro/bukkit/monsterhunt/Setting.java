@@ -20,7 +20,7 @@ public enum Setting {
     AnnounceLead("AnnounceLead", true),
     SelectionTool("SelectionTool", 268),
     HuntZoneMode("HuntZoneMode", false),
-    AnnounceSignUp("AnnounceSignUp", true),
+    AnnounceSignUp("AnnounceSignUp", false),
 
     EnableReward("Rewards.EnableReward", false),
     EnableRewardEveryonePermission("Rewards.EnableRewardEveryonePermission", false),
@@ -44,7 +44,7 @@ public enum Setting {
     HuntZoneWorld("HuntZone.World", MonsterHunt.instance.getServer().getWorlds().get(0).getName()),
 
     StartMessage("Messages.StartMessage", "&8[&7!&8]&2Monster Hunt have started in <World>!"),
-    FinishMessageWinners("Messages.FinishMessageWinners", "&8[&7!&8]&2Sun is rising, so monster Hunt is finished in world <World>! Winners of the today's match are: [NEWLINE] 1st place: &3<NamesPlace1> &9(<PointsPlace1> points) [NEWLINE] &22nd place: &3<NamesPlace2> &9(<PointsPlace2> points) [NEWLINE] &23rd place: &3<NamesPlace3> &9(<PointsPlace3> points)"),
+    FinishMessageWinners("Messages.FinishMessageWinners", "&8[&7!&8]&2Sun is rising, so monster Hunt is finished in <World>! Winners of the today's match are: [NEWLINE] &71st place: &3<NamesPlace1> &9(<PointsPlace1> points) [NEWLINE] &72nd place: &3<NamesPlace2> &9(<PointsPlace2> points) [NEWLINE] &73rd place: &3<NamesPlace3> &9(<PointsPlace3> points)"),
     KillMessageGeneral("Messages.KillMessageGeneral", "&8[&7!&8]&7You killed <MobName> (<MobValue>). You have &3<Points> &7points so far."),
     KillMessageWolf("Messages.KillMessageWolf", "&8[&7!&8]&7Your wolf killed <MobName> (<MobValue>). You have &3<Points> &7points so far."),
     KillMessageArrow("Messages.KillMessageArrow", "&8[&7!&8]&7You killed <MobName> with an arrow (<MobValue>). You have &3<Points> &7points so far."),
@@ -53,14 +53,13 @@ public enum Setting {
     DeathMessage("Messages.DeathMessage", "&8[&7!&8]You have died, so your Monster Hunt score is reduced by &380%."),
     SignUpBeforeHuntMessage("Messages.SignupBeforeHuntMessage", "&8[&7!&8]&7You have signed up for the next hunt in <World>!"),
     SignUpAfterHuntMessage("Messages.SignupAtHuntMessage", "&8[&7!&8]&7You have signed up for the hunt in <World>."),
-    HighScoreMessage("Messages.HighScoreMessage", "&8[&7!&8]&6You have reached a new high score: &3<Points> &6points!"),
+    HighScoreMessage("Messages.HighScoreMessage", "&8[&7!&8]&6You have reached a new high score: &3<Points> &6points![NEWLINE]&7For more information, try: &3/huntscore [player|top|rank]"),
     FinishMessageNotEnoughPoints("Messages.FinishMessageNotEnoughPoints", "&8[&7!&8]&7Sun is rising, so monster Hunt is finished in <World>! Unfortunately nobody killed enough monsters, so there is no winner."),
     FinishMessageNotEnoughPlayers("Messages.FinishMessageNotEnoughPlayers", "&8[&7!&8]&7Sun is rising, so monster Hunt is finished in <World>! Unfortunately there were not enough players participating, so there is no winner."),
     MessageSignUpPeriod("Messages.MessageSignUpPeriod", "&8[&7!&8]&7Monster Hunt will begin shorty in <World>."),
-    //MessageSignUpPeriod("Messages.MessageSignUpPeriod", "&8[&7!&8]&7Monster Hunt will begin in several minutes in <World>. Type &3/hunt &7to join"),
-    MessageTooLateSignUp("Messages.MessageTooLateSignUp", "&8[&7!&8]&7Sorry, you are too late to sign up. More luck next time!"),
+    MessageTooLateSignUp("Messages.MessageTooLateSignUp", "&8[&7!&8]&7You are too late to sign up."),
     MessageAlreadySignedUp("Messages.MessageAlreadySignedUp", "&8[&7!&8]&7You are already signed up!"),
-    MessageStartNotEnoughPlayers("Messages.MessageStartNotEnoughPlayers", "&8[&7!&8]&7Monster Hunt was about to start, but unfortunately there were not enough players signed up. "),
+    MessageStartNotEnoughPlayers("Messages.MessageStartNotEnoughPlayers", "&8[&7!&8]&7Not enougth players to start Monster Hunt. "),
     KillMobSpawnedInsideMessage("Messages.KillMobSpawnedInsideMessage", "&8[&7!&8]&7Your kill was not counted. Stop grinding in caves and go outside!"),
     MessageHuntStatusNotActive("Messages.MessageHuntStatusNotActive", "&8[&7!&8]&7Hunt is currently not active anywhere"),
     MessageHuntStatusHuntActive("Messages.MessageHuntStatusHuntActive", "&8[&7!&8]&2Hunt is active in <Worlds>"),
@@ -69,10 +68,10 @@ public enum Setting {
     MessageHuntStatusNoKills("Messages.MessageHuntStatusNoKills", "&8[&7!&8]&7You haven't killed any mob in this world's hunt yet."),
     MessageHuntStatusCurrentScore("Messages.MessageHuntStatusCurrentScore", "&8[&7!&8]&7Your current score in this world's hunt is &3<Points> &7points!"),
     MessageHuntStatusTimeReamining("Messages.MessageHuntStatusTimeReamining", "&8[&7!&8]&7You have only &3<Timeleft>% &7of the night left in this world!"),
-    MessageLead("Messages.MessageLead", "&8[&7!&8]&7<Player> has just taken over lead with <Points> points!"),
+    MessageLead("Messages.MessageLead", "&8[&7!&8]&9<Player> &2has just taken over lead with &3<Points> &2points!"),
     MessageHuntTeleNoHunt("Messages.MessageHuntTeleNoHunt", "&8[&7!&8]&7You cannot teleport to hunt zone when there is no hunt!"),
     MessageHuntTeleNotSignedUp("Messages.MessageHuntTeleNotSignedUp", "&8[&7!&8]&7You cannot teleport to hunt zone if you are not signed up to the hunt!"),
-    SignUpAnnouncement("Messages.SignUpAnnouncement", "&8[&7!&8]&3<Player> &7has signed up for the hunt in <World>!");
+    SignUpAnnouncement("Messages.SignUpAnnouncement", "&8[&7!&8]&9<Player> &7has signed up for the hunt in <World>!");
 
     private String name;
     private Object def;

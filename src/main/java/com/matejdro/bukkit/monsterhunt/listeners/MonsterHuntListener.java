@@ -13,6 +13,7 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Guardian;
@@ -34,6 +35,8 @@ import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -220,6 +223,15 @@ public class MonsterHuntListener implements Listener {
         } else if (monster instanceof PolarBear) {
             points = world.settings.getMonsterValue("PolarBear", cause);
             name = "PolarBear";
+        } else if (monster instanceof Endermite) {
+            points = world.settings.getMonsterValue("Endermite", cause);
+            name = "Endermite";
+        } else if (monster instanceof Witch) {
+            points = world.settings.getMonsterValue("Witch", cause);
+            name = "Witch";
+        } else if (monster instanceof Wither) {
+            points = world.settings.getMonsterValue("Wither", cause);
+            name = "Wither";
         } else {
             return;
         }
