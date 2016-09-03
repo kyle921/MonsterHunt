@@ -197,7 +197,7 @@ public class InputOutput {
             e1.printStackTrace();
         }
 
-        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "TamedWolf", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker", "PolarBear" }) {
+        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker", "PolarBear" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
@@ -227,7 +227,7 @@ public class InputOutput {
             //Settings.globals.set("Value." + i + ".Snowball", 20);
             //Settings.globals.set("Value." + i + ".283", 15);
         }
-        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "Player", "Giant" }) {
+        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "Player", "Giant", "TamedWolf" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 

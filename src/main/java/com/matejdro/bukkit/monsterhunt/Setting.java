@@ -43,8 +43,8 @@ public enum Setting {
     HuntZoneTeleportLocation("HuntZone.TeleportLocation", "0,0,0"),
     HuntZoneWorld("HuntZone.World", MonsterHunt.instance.getServer().getWorlds().get(0).getName()),
 
-    StartMessage("Messages.StartMessage", "&8[&7!&8]&2Monster Hunt have started in <World>!"),
-    FinishMessageWinners("Messages.FinishMessageWinners", "&8[&7!&8]&2Sun is rising, so monster Hunt is finished in <World>! Winners of the today's match are: [NEWLINE] &71st place: &3<NamesPlace1> &9(<PointsPlace1> points) [NEWLINE] &72nd place: &3<NamesPlace2> &9(<PointsPlace2> points) [NEWLINE] &73rd place: &3<NamesPlace3> &9(<PointsPlace3> points)"),
+    StartMessage("Messages.StartMessage", "&8[&7!&8]&9Monster Hunt have started in <World>![NEWLINE]&8[&7!&8]&9Kill as many hostile mobs you can before the nigth is over"),
+    FinishMessageWinners("Messages.FinishMessageWinners", "&8[&7!&8]&2Monster Hunt is finished in <World>! Winners of the today's match are: [NEWLINE] &71st place: &3<NamesPlace1> &9(<PointsPlace1> points) [NEWLINE] &72nd place: &3<NamesPlace2> &9(<PointsPlace2> points) [NEWLINE] &73rd place: &3<NamesPlace3> &9(<PointsPlace3> points)"),
     KillMessageGeneral("Messages.KillMessageGeneral", "&8[&7!&8]&7You killed <MobName> (<MobValue>). You have &3<Points> &7points so far."),
     KillMessageWolf("Messages.KillMessageWolf", "&8[&7!&8]&7Your wolf killed <MobName> (<MobValue>). You have &3<Points> &7points so far."),
     KillMessageArrow("Messages.KillMessageArrow", "&8[&7!&8]&7You killed <MobName> with an arrow (<MobValue>). You have &3<Points> &7points so far."),

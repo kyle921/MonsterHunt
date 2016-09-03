@@ -29,14 +29,14 @@ public class HuntScoreCommand implements CommandExecutor {
                 number = Integer.parseInt(args[1]);
 
             LinkedHashMap<String, Integer> tops = InputOutput.getTopScores(number);
-            Util.Message("&2# Top high scores: #", sender);
+            Util.Message("&9# Top high scores: #", sender);
             int counter = 0;
             for (String player : tops.keySet()) {
                 counter++;
                 String rank = String.valueOf(counter);
                 String score = String.valueOf(tops.get(player));
 
-                Util.Message("&8[&7!&8]&7" + rank + ". &6" + player + "&7 - &a" + score + "&7 points", sender);
+                Util.Message("&7" + rank + ". &6" + player + "&7 - &a" + score + "&7 points", sender);
             }
         } else if (args.length > 0) {
             Integer score = InputOutput.getHighScore(args[0]);
