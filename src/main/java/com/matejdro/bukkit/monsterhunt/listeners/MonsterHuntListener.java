@@ -15,14 +15,17 @@ import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.Guardian;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Shulker;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
@@ -208,6 +211,15 @@ public class MonsterHuntListener implements Listener {
         } else if (monster instanceof Villager) {
             points = world.settings.getMonsterValue("Villager", cause);
             name = "Villager";
+        } else if (monster instanceof Guardian) {
+            points = world.settings.getMonsterValue("Guardian", cause);
+            name = "Guardian";
+        } else if (monster instanceof Shulker) {
+            points = world.settings.getMonsterValue("Shulker", cause);
+            name = "Shulker";
+        } else if (monster instanceof PolarBear) {
+            points = world.settings.getMonsterValue("PolarBear", cause);
+            name = "PolarBear";
         } else {
             return;
         }
