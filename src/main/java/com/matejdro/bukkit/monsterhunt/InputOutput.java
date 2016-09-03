@@ -197,7 +197,7 @@ public class InputOutput {
             e1.printStackTrace();
         }
 
-        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "TamedWolf", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker" }) {
+        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "TamedWolf", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker", "PolarBear" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
@@ -207,7 +207,7 @@ public class InputOutput {
             //Settings.globals.set("Value." + i + ".Snowball", 20);
             //Settings.globals.set("Value." + i + ".283", 15);
         }
-        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "ElectrifiedCreeper", "Enderman", "CaveSpider", "EnderDragon", "Blaze", "Witch", "Wither"}) {
+        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "Enderman", "CaveSpider", "Witch"}) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
@@ -217,7 +217,17 @@ public class InputOutput {
             //Settings.globals.set("Value." + i + ".Snowball", 20);
             //Settings.globals.set("Value." + i + ".283", 15);
         }
-        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "PolarBear", "Player", "Giant" }) {
+        for (String i : new String[] { "ElectrifiedCreeper", "EnderDragon", "Wither"}) {
+            if (Settings.globals.get("Value." + i) != null)
+                continue;
+
+            Settings.globals.set("Value." + i + ".General", 50);
+            Settings.globals.set("Value." + i + ".Wolf", 40);
+            Settings.globals.set("Value." + i + ".Arrow", 45);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
+        }
+        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "Player", "Giant" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
