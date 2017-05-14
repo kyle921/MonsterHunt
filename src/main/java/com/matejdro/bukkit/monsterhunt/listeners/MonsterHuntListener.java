@@ -14,9 +14,11 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Endermite;
+import org.bukkit.entity.Evoker;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
 import org.bukkit.entity.Guardian;
+import org.bukkit.entity.Illusioner;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.MushroomCow;
@@ -34,7 +36,9 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
+import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Vindicator;
 import org.bukkit.entity.Witch;
 import org.bukkit.entity.Wither;
 import org.bukkit.entity.Wolf;
@@ -229,6 +233,18 @@ public class MonsterHuntListener implements Listener {
         } else if (monster instanceof Witch) {
             points = world.settings.getMonsterValue("Witch", cause);
             name = "Witch";
+        } else if (monster instanceof Vex) {
+            points = world.settings.getMonsterValue("Vex", cause);
+            name = "Vex";
+        } else if (monster instanceof Vindicator) {
+            points = world.settings.getMonsterValue("Vindicator", cause);
+            name = "Vindicator";
+        } else if (monster instanceof Evoker) {
+            points = world.settings.getMonsterValue("Evoker", cause);
+            name = "Evoker";
+        } else if (monster instanceof Illusioner) {
+            points = world.settings.getMonsterValue("Illusioner", cause);
+            name = "Illusioner";
         } else if (monster instanceof Wither) {
             points = world.settings.getMonsterValue("Wither", cause);
             name = "Wither";

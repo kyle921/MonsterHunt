@@ -207,7 +207,7 @@ public class InputOutput {
             //Settings.globals.set("Value." + i + ".Snowball", 20);
             //Settings.globals.set("Value." + i + ".283", 15);
         }
-        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "Enderman", "CaveSpider", "Witch"}) {
+        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "Enderman", "CaveSpider", "Witch", "Vex", "Evoker", "Vindicator", "Illusioner"}) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
