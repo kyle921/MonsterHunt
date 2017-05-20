@@ -2,6 +2,7 @@ package com.matejdro.bukkit.monsterhunt.listeners;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -94,6 +95,57 @@ public class MonsterHuntListener implements Listener {
         if (world == null || world.getWorld() == null || world.state < 2) {
             return;
         }
+        //Anti grinder check
+        //check if their head is inside a block
+        if (event.getEntity().getEyeLocation().getBlock().getType() != Material.AIR){
+            return;
+        }
+     // no loot for monsters which die standing in water, to make building grinders even more difficult
+        Block block = event.getEntity().getLocation().getBlock();
+
+            if (block != null && (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER)){
+                return;
+        }
+
+        // also no loot for monsters who can't reach their (melee) killers
+        Player killer = event.getEntity().getKiller();
+        if (killer != null)
+        {
+            Location monsterEyeLocation = event.getEntity().getEyeLocation();
+            Location playerEyeLocation = killer.getEyeLocation();
+
+            // interpolate locations
+            Location[] locations = new Location[]{
+                    new Location(monsterEyeLocation.getWorld(), 0.2 * monsterEyeLocation.getX() + 0.8 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.2 * monsterEyeLocation.getZ() + 0.8 * playerEyeLocation.getZ()),
+                    new Location(monsterEyeLocation.getWorld(), 0.5 * monsterEyeLocation.getX() + 0.5 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.5 * monsterEyeLocation.getZ() + 0.5 * playerEyeLocation.getZ()),
+                    new Location(monsterEyeLocation.getWorld(), 0.8 * monsterEyeLocation.getX() + 0.2 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.8 * monsterEyeLocation.getZ() + 0.2 * playerEyeLocation.getZ()),};
+
+            for (Location middleLocation : locations)
+            {
+                // monster is blocked at eye level, unable to advance toward killer
+                if (middleLocation.getBlock().getType() != Material.AIR)
+                    return;
+                    // monster doesn't have room above to hurdle a foot level block, unable to advance toward killer
+                else
+                {
+                    Block bottom = middleLocation.getBlock().getRelative(BlockFace.DOWN);
+                    Block top = middleLocation.getBlock().getRelative(BlockFace.UP);
+                    if (top.getType() != Material.AIR &&
+                            bottom.getType() != Material.AIR
+                            || bottom.getType() == Material.FENCE
+                            || bottom.getType() == Material.FENCE_GATE
+                            || bottom.getType() == Material.COBBLE_WALL
+                            || bottom.getType() == Material.NETHER_FENCE)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+        
         kill((LivingEntity) event.getEntity(), world);
     }
 
