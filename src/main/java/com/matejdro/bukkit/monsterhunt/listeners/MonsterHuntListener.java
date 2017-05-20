@@ -2,6 +2,7 @@ package com.matejdro.bukkit.monsterhunt.listeners;
 
 import java.util.Map.Entry;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -13,16 +14,22 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.Endermite;
+import org.bukkit.entity.Evoker;
 import org.bukkit.entity.Ghast;
 import org.bukkit.entity.Giant;
+import org.bukkit.entity.Guardian;
+import org.bukkit.entity.Illusioner;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.MagmaCube;
 import org.bukkit.entity.MushroomCow;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.PolarBear;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Shulker;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.Slime;
@@ -30,7 +37,11 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
+import org.bukkit.entity.Vex;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Vindicator;
+import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -84,6 +95,57 @@ public class MonsterHuntListener implements Listener {
         if (world == null || world.getWorld() == null || world.state < 2) {
             return;
         }
+        //Anti grinder check
+        //check if their head is inside a block
+        if (event.getEntity().getEyeLocation().getBlock().getType() != Material.AIR){
+            return;
+        }
+     // no loot for monsters which die standing in water, to make building grinders even more difficult
+        Block block = event.getEntity().getLocation().getBlock();
+
+            if (block != null && (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER)){
+                return;
+        }
+
+        // also no loot for monsters who can't reach their (melee) killers
+        Player killer = event.getEntity().getKiller();
+        if (killer != null)
+        {
+            Location monsterEyeLocation = event.getEntity().getEyeLocation();
+            Location playerEyeLocation = killer.getEyeLocation();
+
+            // interpolate locations
+            Location[] locations = new Location[]{
+                    new Location(monsterEyeLocation.getWorld(), 0.2 * monsterEyeLocation.getX() + 0.8 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.2 * monsterEyeLocation.getZ() + 0.8 * playerEyeLocation.getZ()),
+                    new Location(monsterEyeLocation.getWorld(), 0.5 * monsterEyeLocation.getX() + 0.5 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.5 * monsterEyeLocation.getZ() + 0.5 * playerEyeLocation.getZ()),
+                    new Location(monsterEyeLocation.getWorld(), 0.8 * monsterEyeLocation.getX() + 0.2 * playerEyeLocation.getX(),
+                            monsterEyeLocation.getY(), 0.8 * monsterEyeLocation.getZ() + 0.2 * playerEyeLocation.getZ()),};
+
+            for (Location middleLocation : locations)
+            {
+                // monster is blocked at eye level, unable to advance toward killer
+                if (middleLocation.getBlock().getType() != Material.AIR)
+                    return;
+                    // monster doesn't have room above to hurdle a foot level block, unable to advance toward killer
+                else
+                {
+                    Block bottom = middleLocation.getBlock().getRelative(BlockFace.DOWN);
+                    Block top = middleLocation.getBlock().getRelative(BlockFace.UP);
+                    if (top.getType() != Material.AIR &&
+                            bottom.getType() != Material.AIR
+                            || bottom.getType() == Material.FENCE
+                            || bottom.getType() == Material.FENCE_GATE
+                            || bottom.getType() == Material.COBBLE_WALL
+                            || bottom.getType() == Material.NETHER_FENCE)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+        
         kill((LivingEntity) event.getEntity(), world);
     }
 
@@ -208,6 +270,36 @@ public class MonsterHuntListener implements Listener {
         } else if (monster instanceof Villager) {
             points = world.settings.getMonsterValue("Villager", cause);
             name = "Villager";
+        } else if (monster instanceof Guardian) {
+            points = world.settings.getMonsterValue("Guardian", cause);
+            name = "Guardian";
+        } else if (monster instanceof Shulker) {
+            points = world.settings.getMonsterValue("Shulker", cause);
+            name = "Shulker";
+        } else if (monster instanceof PolarBear) {
+            points = world.settings.getMonsterValue("PolarBear", cause);
+            name = "PolarBear";
+        } else if (monster instanceof Endermite) {
+            points = world.settings.getMonsterValue("Endermite", cause);
+            name = "Endermite";
+        } else if (monster instanceof Witch) {
+            points = world.settings.getMonsterValue("Witch", cause);
+            name = "Witch";
+        } else if (monster instanceof Vex) {
+            points = world.settings.getMonsterValue("Vex", cause);
+            name = "Vex";
+        } else if (monster instanceof Vindicator) {
+            points = world.settings.getMonsterValue("Vindicator", cause);
+            name = "Vindicator";
+        } else if (monster instanceof Evoker) {
+            points = world.settings.getMonsterValue("Evoker", cause);
+            name = "Evoker";
+        } else if (monster instanceof Illusioner) {
+            points = world.settings.getMonsterValue("Illusioner", cause);
+            name = "Illusioner";
+        } else if (monster instanceof Wither) {
+            points = world.settings.getMonsterValue("Wither", cause);
+            name = "Wither";
         } else {
             return;
         }

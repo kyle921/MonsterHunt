@@ -197,18 +197,37 @@ public class InputOutput {
             e1.printStackTrace();
         }
 
-        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "ZombiePigman", "Giant", "TamedWolf", "WildWolf", "ElectrifiedCreeper", "Player", "Enderman", "Silverfish", "CaveSpider", "EnderDragon", "MagmaCube", "Blaze" }) {
+        for (String i : new String[] { "Zombie", "Skeleton", "Creeper", "Spider", "Ghast", "Slime", "WildWolf", "Silverfish", "MagmaCube", "Blaze", "Guardian", "Endermite", "Shulker", "PolarBear" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
             Settings.globals.set("Value." + i + ".General", 10);
-            Settings.globals.set("Value." + i + ".Wolf", 7);
-            Settings.globals.set("Value." + i + ".Arrow", 4);
-            Settings.globals.set("Value." + i + ".Snowball", 20);
-            Settings.globals.set("Value." + i + ".283", 20);
+            Settings.globals.set("Value." + i + ".Wolf", 5);
+            Settings.globals.set("Value." + i + ".Arrow", 6);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
         }
+        for (String i : new String[] { "Ghast", "ZombiePigman", "Giant", "Enderman", "CaveSpider", "Witch", "Vex", "Evoker", "Vindicator", "Illusioner"}) {
+            if (Settings.globals.get("Value." + i) != null)
+                continue;
 
-        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager" }) {
+            Settings.globals.set("Value." + i + ".General", 15);
+            Settings.globals.set("Value." + i + ".Wolf", 8);
+            Settings.globals.set("Value." + i + ".Arrow", 10);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
+        }
+        for (String i : new String[] { "ElectrifiedCreeper", "EnderDragon", "Wither"}) {
+            if (Settings.globals.get("Value." + i) != null)
+                continue;
+
+            Settings.globals.set("Value." + i + ".General", 50);
+            Settings.globals.set("Value." + i + ".Wolf", 40);
+            Settings.globals.set("Value." + i + ".Arrow", 45);
+            //Settings.globals.set("Value." + i + ".Snowball", 20);
+            //Settings.globals.set("Value." + i + ".283", 15);
+        }
+        for (String i : new String[] { "MushroomCow", "Chicken", "Cow", "Pig", "Sheep", "SnowGolem", "Squid", "Villager", "Player", "Giant", "TamedWolf" }) {
             if (Settings.globals.get("Value." + i) != null)
                 continue;
 
